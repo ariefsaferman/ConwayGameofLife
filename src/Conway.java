@@ -52,9 +52,33 @@ public class Conway
                     for (int m = -1; m <= 1; m++) {
                         lifeNeighbour += grid[i+l][j+m];
                         lifeNeighbour -= grid[i][j];
+
+                        if ((grid[i][j] == 1) && (lifeNeighbour < 2))
+                            future[i][j] = 0;
+
+                        else if ((grid[i][j] == 1) && (lifeNeighbour > 3))
+                            future[i][j] = 0;
+
+                        else if ((grid[i][j] == 0) && (lifeNeighbour == 3))
+                            future[i][j] = 1;
+
+                        else
+                            future[i][j] = grid[i][j];
                     }
                 }
             }
+        }
+        System.out.println("Next Generation");
+        for (int i = 0; i < M; i++)
+        {
+            for (int j = 0; j < N; j++)
+            {
+                if (future[i][j] == 0)
+                    System.out.print(".");
+                else
+                    System.out.print("*");
+            }
+            System.out.println();
         }
     }
 }
